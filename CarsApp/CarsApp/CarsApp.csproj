@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarsApp.ApplicationServices\CarsApp.ApplicationServices.csproj" />
+    <ProjectReference Include="..\CarsApp.Data\CarsApp.Data.csproj" />
+  </ItemGroup>
+
 </Project>

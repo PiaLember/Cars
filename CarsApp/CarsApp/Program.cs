@@ -1,3 +1,8 @@
+using CarsApp.ApplicationServices.Services;
+using CarsApp.Core.ServiceInterface;
+using CarsApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CarsApp
 {
     public class Program
@@ -8,6 +13,13 @@ namespace CarsApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //builder.Services.AddScoped<ICarsServices, CarsServices>();
+
+            builder.Services.AddDbContext<CarContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            
 
             var app = builder.Build();
 

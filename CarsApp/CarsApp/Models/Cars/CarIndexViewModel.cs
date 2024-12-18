@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CarsApp.Core.Domain
+﻿namespace CarsApp.Models.Cars
 {
-    public class Car
+    public class CarIndexViewModel
     {
         public Guid? Id { get; set; }
         public string Make { get; set; } = string.Empty;
