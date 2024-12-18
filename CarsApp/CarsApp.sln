@@ -5,6 +5,12 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsApp", "CarsApp\CarsApp.csproj", "{1C256A03-D94C-4DD5-9006-8338768B1888}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsApp.Core", "CarsApp.Core\CarsApp.Core.csproj", "{16124F3C-72A5-453F-B4E1-499EE0833EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsApp.ApplicationServices", "CarsApp.ApplicationServices\CarsApp.ApplicationServices.csproj", "{FDDE871A-0BF1-4F85-835E-96EF89684CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsApp.Data", "CarsApp.Data\CarsApp.Data.csproj", "{B281E55E-4B77-4B3E-8A3B-8BC6F55B5CEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{1C256A03-D94C-4DD5-9006-8338768B1888}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C256A03-D94C-4DD5-9006-8338768B1888}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C256A03-D94C-4DD5-9006-8338768B1888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16124F3C-72A5-453F-B4E1-499EE0833EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16124F3C-72A5-453F-B4E1-499EE0833EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16124F3C-72A5-453F-B4E1-499EE0833EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16124F3C-72A5-453F-B4E1-499EE0833EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDE871A-0BF1-4F85-835E-96EF89684CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDE871A-0BF1-4F85-835E-96EF89684CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDE871A-0BF1-4F85-835E-96EF89684CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDE871A-0BF1-4F85-835E-96EF89684CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B281E55E-4B77-4B3E-8A3B-8BC6F55B5CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B281E55E-4B77-4B3E-8A3B-8BC6F55B5CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B281E55E-4B77-4B3E-8A3B-8BC6F55B5CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B281E55E-4B77-4B3E-8A3B-8BC6F55B5CEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
