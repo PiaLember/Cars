@@ -12,7 +12,7 @@ namespace CarsApp.Core.Domain
         public string Make { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
-        public DateTime Year { get; set; }
+        public int Year { get; set; }
         public string Fuel { get; set; } = string.Empty;
         public string Transmission { get; set; } = string.Empty;
 

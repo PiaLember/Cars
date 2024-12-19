@@ -14,7 +14,7 @@ namespace CarsApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //builder.Services.AddScoped<ICarsServices, CarsServices>();
+            builder.Services.AddScoped<ICarsServices, CarsServices>();
 
             builder.Services.AddDbContext<CarContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

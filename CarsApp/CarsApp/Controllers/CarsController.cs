@@ -1,4 +1,6 @@
-﻿using CarsApp.Core.ServiceInterface;
+﻿
+using CarsApp.Core.Dto;
+using CarsApp.Core.ServiceInterface;
 using CarsApp.Data;
 using CarsApp.Models.Cars;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +34,41 @@ namespace CarsApp.Controllers
                 }).ToList() ?? new List<CarIndexViewModel>();
 
             return View(result);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var vm = new CarCreateUpdateViewModel();
+            return View("CreateUpdate", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CarCreateUpdateViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var dto = new CarDto
+                {
+                    Make = vm.Make,
+                    Model = vm.Model,
+                    Color = vm.Color,
+                    Year = vm.Year,  
+                    Fuel = vm.Fuel,
+                    Transmission = vm.Transmission,
+                    CreatedAt = DateTime.Now,
+                    ModifiedAt = DateTime.Now,
+                };
+
+                var result = await _carsServices.Create(dto);
+
+                if (result != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View("CreateUpdate", vm);
         }
     }
 }

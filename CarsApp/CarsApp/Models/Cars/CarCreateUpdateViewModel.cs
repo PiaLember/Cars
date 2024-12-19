@@ -1,6 +1,6 @@
 ﻿namespace CarsApp.Models.Cars
 {
-    public class CarIndexViewModel
+    public class CarCreateUpdateViewModel
     {
         public Guid? Id { get; set; }
         public string Make { get; set; } = string.Empty;
