@@ -51,6 +51,11 @@
             @Html.DisplayFor(model => model.ModifiedAt)
         </div>
 
+        <div class="form-group row">
+            <label asp-for="Picture" class="col-sm-2 col-form-label"></label>
+            <img src="@Html.DisplayFor(model => model.Picture)" style="width:100px; height: auto" />
+        </div>
+
     </dl>
     <a asp-action="Index" asp-controller="Cars" class="btn btn-danger">Back</a>
 </div>

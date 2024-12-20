@@ -28,6 +28,7 @@ else
                         <th scope="col">Fuel</th>
                         <th scope="col">Transmission</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,9 @@ else
                             <td>@car.Value.Year</td>
                             <td>@car.Value.Fuel</td>
                             <td>@car.Value.Transmission</td>
+                            <td>
+                                <img src="@car.Value.Picture" alt="@car.Value.Make" style="width:100px; height: auto" />
+                            </td>
                             <td>
                                 <a asp-action="details" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn btn-info">Details</a>
                                 <a asp-action="update" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn btn-primary">Update</a>

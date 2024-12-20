@@ -33,6 +33,7 @@ namespace CarsApp.Controllers
                     Year = x.Year,
                     Fuel = x.Fuel,
                     Transmission = x.Transmission,
+                    Picture = x.Picture,
 
                 }).ToList() ?? new List<CarIndexViewModel>();
 
@@ -59,6 +60,7 @@ namespace CarsApp.Controllers
             vm.Year = car.Year;    
             vm.Fuel = car.Fuel;
             vm.Transmission = car.Transmission;
+            vm.Picture = car.Picture;
 
             vm.CreatedAt = car.CreatedAt;
             vm.ModifiedAt = car.ModifiedAt;
@@ -85,6 +87,7 @@ namespace CarsApp.Controllers
                     Year = vm.Year,  
                     Fuel = vm.Fuel,
                     Transmission = vm.Transmission,
+                    Picture = vm.Picture,
                     CreatedAt = DateTime.Now,
                     ModifiedAt = DateTime.Now,
                 };
@@ -120,6 +123,7 @@ namespace CarsApp.Controllers
                 Year = car.Year,
                 Fuel = car.Fuel,
                 Transmission = car.Transmission,
+                Picture = car.Picture,
                 CreatedAt = car.CreatedAt,
                 ModifiedAt = car.ModifiedAt
             };
@@ -142,6 +146,7 @@ namespace CarsApp.Controllers
                     Year = vm.Year,
                     Fuel = vm.Fuel,
                     Transmission = vm.Transmission,
+                    Picture = vm.Picture,
                     CreatedAt = DateTime.Now,
                     ModifiedAt = DateTime.Now,
                 };
@@ -177,6 +182,7 @@ namespace CarsApp.Controllers
                 Year = car.Year,
                 Fuel = car.Fuel,
                 Transmission = car.Transmission,
+                Picture = car.Picture,
                 CreatedAt = car.CreatedAt,
                 ModifiedAt = car.ModifiedAt
             };

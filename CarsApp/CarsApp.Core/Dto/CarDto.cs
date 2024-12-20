@@ -15,6 +15,7 @@ namespace CarsApp.Core.Dto
         public int Year { get; set; }
         public string Fuel { get; set; } = string.Empty;
         public string Transmission { get; set; } = string.Empty;
+        public string Picture { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }

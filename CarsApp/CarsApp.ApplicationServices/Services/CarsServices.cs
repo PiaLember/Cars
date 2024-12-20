@@ -31,7 +31,8 @@ namespace CarsApp.ApplicationServices.Services
                 Color = dto.Color,
                 Year = dto.Year,
                 Fuel = dto.Fuel,
-                Transmission = dto.Transmission,               
+                Transmission = dto.Transmission, 
+                Picture = dto.Picture,
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
             };
@@ -69,6 +70,7 @@ namespace CarsApp.ApplicationServices.Services
             car.Year = dto.Year;
             car.Fuel = dto.Fuel;
             car.Transmission = dto.Transmission; 
+            car.Picture = dto.Picture;
             car.CreatedAt = dto.CreatedAt; // Preserve the original creation date.
             car.ModifiedAt = DateTime.Now; // Update the modified date to the current date.
 
