@@ -97,5 +97,60 @@ namespace CarsApp.Controllers
 
             return View("CreateUpdate", vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var car = await _carsServices.DetailsAsync(id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarCreateUpdateViewModel
+            {
+                Id = car.Id,
+                Make = car.Make,
+                Model = car.Model,
+                Color = car.Color,
+                Year = car.Year,
+                Fuel = car.Fuel,
+                Transmission = car.Transmission,
+                CreatedAt = car.CreatedAt,
+                ModifiedAt = car.ModifiedAt
+            };
+
+            return View("CreateUpdate", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(CarCreateUpdateViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var dto = new CarDto
+                {
+                    Id = vm.Id,
+                    Make = vm.Make,
+                    Model = vm.Model,
+                    Color = vm.Color,
+                    Year = vm.Year,
+                    Fuel = vm.Fuel,
+                    Transmission = vm.Transmission,
+                    CreatedAt = DateTime.Now,
+                    ModifiedAt = DateTime.Now,
+                };
+
+                var result = await _carsServices.Update(dto);
+
+                if (result != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View("CreateUpdate", vm);
+        }
     }
 }

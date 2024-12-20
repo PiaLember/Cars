@@ -8,5 +8,6 @@ namespace CarsApp.Core.ServiceInterface
     {
         Task<Car> Create(CarDto dto);
         Task<Car> DetailsAsync(Guid id);
+        Task<Car> Update(CarDto dto);
     }
 }

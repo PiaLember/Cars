@@ -48,5 +48,29 @@ namespace CarsApp.ApplicationServices.Services
 
             return result;
         }
+
+        public async Task<Car> Update(CarDto dto)
+        {
+
+            Car car = await _context.Cars.FindAsync(dto.Id);
+
+            if (car == null)
+            {
+                return null;
+            }
+
+            car.Make = dto.Make;
+            car.Model = dto.Model;
+            car.Color = dto.Color;
+            car.Year = dto.Year;
+            car.Fuel = dto.Fuel;
+            car.Transmission = dto.Transmission; 
+            car.CreatedAt = dto.CreatedAt;
+            car.ModifiedAt = DateTime.Now;
+
+            _context.Cars.Update(car);
+            await _context.SaveChangesAsync();
+            return car;
+        }
     }
 }
