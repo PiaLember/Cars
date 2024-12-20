@@ -37,6 +37,33 @@ namespace CarsApp.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var car = await _carsServices.DetailsAsync(id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarDetailsViewModel();
+
+            vm.Id = car.Id;
+            vm.Make = car.Make;
+            vm.Model = car.Model;
+            vm.Color = car.Color;
+            vm.Year = car.Year;    
+            vm.Fuel = car.Fuel;
+            vm.Transmission = car.Transmission;
+
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
+
+
+            return View(vm);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             var vm = new CarCreateUpdateViewModel();

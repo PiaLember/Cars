@@ -7,5 +7,6 @@ namespace CarsApp.Core.ServiceInterface
     public interface ICarsServices
     {
         Task<Car> Create(CarDto dto);
+        Task<Car> DetailsAsync(Guid id);
     }
 }
