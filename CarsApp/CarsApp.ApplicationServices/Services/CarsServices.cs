@@ -72,5 +72,22 @@ namespace CarsApp.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return car;
         }
+
+        public async Task<Car> Delete(Guid id)
+        {
+
+            var car = await _context.Cars.FindAsync(id);
+
+            if (car == null)
+            {
+                return null;
+            }
+
+
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+
+            return car;
+        }
     }
 }

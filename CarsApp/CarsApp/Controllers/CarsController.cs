@@ -152,5 +152,44 @@ namespace CarsApp.Controllers
 
             return View("CreateUpdate", vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var car = await _carsServices.DetailsAsync(id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarDeleteViewModel
+            {
+                Id = car.Id,
+                Make = car.Make,
+                Model = car.Model,
+                Color = car.Color,
+                Year = car.Year,
+                Fuel = car.Fuel,
+                Transmission = car.Transmission,
+                CreatedAt = car.CreatedAt,
+                ModifiedAt = car.ModifiedAt
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var carId = await _carsServices.Delete(id);
+
+            if (carId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
