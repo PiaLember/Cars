@@ -1,5 +1,23 @@
 ﻿@model IEnumerable<CarsApp.Models.Cars.CarIndexViewModel>
 
+@{
+    var currentSortOrder = ViewContext.HttpContext.Request.Query["sortOrder"].ToString();
+    var currentSearchString = ViewContext.HttpContext.Request.Query["searchString"].ToString();
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+    int maxPageLinks = 3;
+    int startPage = Math.Max(1, currentPage - 1);
+    int endPage = Math.Min(totalPages, currentPage + 1);
+
+    if (currentPage == 1)
+    {
+        endPage = Math.Min(totalPages, startPage + (maxPageLinks - 1));
+    }
+    else if (currentPage == totalPages)
+    {
+        startPage = Math.Max(1, endPage - (maxPageLinks - 1));
+    }
+}
 
 <div class="container">
     <a asp-action="create" asp-controller="Cars" type="submit" class="btn btn-success">Create</a>
@@ -20,13 +38,63 @@ else
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Nr</th>
+                        <th scope="col"></th>
                         <th scope="col">Make</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Fuel</th>
-                        <th scope="col">Transmission</th>
+                        <th scope="col">
+                            Model
+                            @if (currentSortOrder == "model_desc")
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="model_asc" asp-route-searchString="@currentSearchString">▲</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="model_desc" asp-route-searchString="@currentSearchString">▼</a>
+                            }
+                        </th>
+                        <th scope="col">
+                            Color
+                            @if (currentSortOrder == "color_desc")
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="color_asc" asp-route-searchString="@currentSearchString">▲</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="color_desc" asp-route-searchString="@currentSearchString">▼</a>
+                            }
+                        </th>
+                        <th scope="col">
+                            Year
+                            @if (currentSortOrder == "year_desc")
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="year_asc" asp-route-searchString="@currentSearchString">▲</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="year_desc" asp-route-searchString="@currentSearchString">▼</a>
+                            }
+                        </th>
+                        <th scope="col">
+                            Fuel
+                            @if (currentSortOrder == "fuel_desc")
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="fuel_asc" asp-route-searchString="@currentSearchString">▲</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="fuel_desc" asp-route-searchString="@currentSearchString">▼</a>
+                            }
+                        </th>
+                        <th scope="col">
+                            Transmission
+                            @if (currentSortOrder == "transmission_desc")
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="transmission_asc" asp-route-searchString="@currentSearchString">▲</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index" asp-route-sortOrder="transmission_desc" asp-route-searchString="@currentSearchString">▼</a>
+                            }
+                        </th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -36,7 +104,7 @@ else
                     {
                         <tr>
                             <td>@car.Index</td>
-                            <td>@car.Value.Make</td>
+                            <td>@car.Value.Make</td>                           
                             <td>@car.Value.Model</td>
                             <td>@car.Value.Color</td>
                             <td>@car.Value.Year</td>
@@ -56,4 +124,38 @@ else
             </table>
         </form>
     </div>
+
+    @if (!string.IsNullOrEmpty(currentSearchString))
+    {
+        <form method="get" asp-action="Index">
+            <button type="submit" class="btn button-primary">Back to Full List</button>
+        </form>
+
+    }
+
+    @if (totalPages > 1)
+    {
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-pageNumber="@(currentPage - 1)" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">@i</a>
+                    </li>
+                }
+
+                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                    <a class="page-link" aria-label="Next" asp-action="Index" asp-route-pageNumber="@(currentPage + 1)" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
 }

@@ -13,6 +13,7 @@ namespace CarsApp.Controllers
     {
         private readonly CarContext _context; // Database context for accessing car data.
         private readonly ICarsServices _carsServices; //Service for business logic related to cars.
+        private const int PageSize = 6;
 
         // Constructor to inject the database context and car services.
         public CarsController(CarContext context, ICarsServices cars)
@@ -21,7 +22,7 @@ namespace CarsApp.Controllers
             _carsServices = cars;
         }
         // Displays a list of cars in the Index view.
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString, int pageNumber = 1)
         {
             var result = _context.Cars
                 .Select(x => new CarIndexViewModel
@@ -35,9 +36,37 @@ namespace CarsApp.Controllers
                     Transmission = x.Transmission,
                     Picture = x.Picture,
 
-                }).ToList() ?? new List<CarIndexViewModel>();
+                });
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                result = result.Where(c => c.Model.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
 
-            return View(result);
+            result = sortOrder switch
+            {
+                "model_desc" => result.OrderByDescending(c => c.Model),
+                "model_asc" => result.OrderBy(c => c.Model),
+                "color_desc" => result.OrderByDescending(c => c.Color),
+                "color_asc" => result.OrderBy(c => c.Color),
+                "year_desc" => result.OrderByDescending(c => c.Year),
+                "year_asc" => result.OrderBy(c => c.Year),
+                "fuel_desc" => result.OrderByDescending(c => c.Fuel),
+                "fuel_asc" => result.OrderBy(c => c.Fuel),
+                "transmission_desc" => result.OrderByDescending(c => c.Transmission),
+                "transmission_asc" => result.OrderBy(c => c.Transmission),
+                _ => result.OrderBy(c => c.Year)
+            };
+
+            int totalItems = result.Count();
+            result = result.Skip((pageNumber - 1) * PageSize).Take(PageSize);
+
+            // Pass pagination data to the view
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / PageSize);
+            ViewBag.CurrentPage = pageNumber;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.SearchString = searchString;
+
+            return View(result.ToList());
         }
 
         // Displays the details of a specific car by its ID.
