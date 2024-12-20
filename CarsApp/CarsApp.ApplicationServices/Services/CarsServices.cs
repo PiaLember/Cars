@@ -10,13 +10,15 @@ namespace CarsApp.ApplicationServices.Services
     public class CarsServices : ICarsServices
 
     {
-        private readonly CarContext _context;
+        private readonly CarContext _context; // Database context for managing cars.
 
+        // Constructor to inject the database context.
         public CarsServices(CarContext context)
         {
             _context = context;
         }
 
+        // Creates a new car record in the database.
         public async Task<Car> Create(CarDto dto)
         {
 
@@ -35,12 +37,13 @@ namespace CarsApp.ApplicationServices.Services
             };
 
 
-            _context.Cars.Add(car);
-            await _context.SaveChangesAsync();
+            _context.Cars.Add(car); // Add the new car to the database context.
+            await _context.SaveChangesAsync(); // Save changes to the database.
 
             return car;
         }
 
+        // Retrieves the details of a car by its ID.
         public async Task<Car> DetailsAsync(Guid id)
         {
             var result = await _context.Cars
@@ -49,30 +52,32 @@ namespace CarsApp.ApplicationServices.Services
             return result;
         }
 
+        // Updates an existing car record in the database.
         public async Task<Car> Update(CarDto dto)
         {
 
-            Car car = await _context.Cars.FindAsync(dto.Id);
+            Car car = await _context.Cars.FindAsync(dto.Id); // Find the car by its ID.
 
             if (car == null)
             {
                 return null;
             }
-
+            // Update the car properties with values from the DTO.
             car.Make = dto.Make;
             car.Model = dto.Model;
             car.Color = dto.Color;
             car.Year = dto.Year;
             car.Fuel = dto.Fuel;
             car.Transmission = dto.Transmission; 
-            car.CreatedAt = dto.CreatedAt;
-            car.ModifiedAt = DateTime.Now;
+            car.CreatedAt = dto.CreatedAt; // Preserve the original creation date.
+            car.ModifiedAt = DateTime.Now; // Update the modified date to the current date.
 
             _context.Cars.Update(car);
             await _context.SaveChangesAsync();
             return car;
         }
 
+        // Deletes a car record from the database.
         public async Task<Car> Delete(Guid id)
         {
 

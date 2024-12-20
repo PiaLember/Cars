@@ -3,6 +3,7 @@ using CarsApp.Core.Dto;
 using CarsApp.Core.ServiceInterface;
 using CarsApp.Data;
 using CarsApp.Models.Cars;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,14 +11,16 @@ namespace CarsApp.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly CarContext _context;
-        private readonly ICarsServices _carsServices;
+        private readonly CarContext _context; // Database context for accessing car data.
+        private readonly ICarsServices _carsServices; //Service for business logic related to cars.
 
+        // Constructor to inject the database context and car services.
         public CarsController(CarContext context, ICarsServices cars)
         {
             _context = context;
             _carsServices = cars;
         }
+        // Displays a list of cars in the Index view.
         public IActionResult Index()
         {
             var result = _context.Cars
@@ -36,6 +39,7 @@ namespace CarsApp.Controllers
             return View(result);
         }
 
+        // Displays the details of a specific car by its ID.
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -63,13 +67,11 @@ namespace CarsApp.Controllers
             return View(vm);
         }
 
+        // Displays the Create view to add a new car.
         [HttpGet]
-        public IActionResult Create()
-        {
-            var vm = new CarCreateUpdateViewModel();
-            return View("CreateUpdate", vm);
-        }
+        public IActionResult Create() => View("CreateUpdate", new CarCreateUpdateViewModel());
 
+        // Handles the creation of a new car.
         [HttpPost]
         public async Task<IActionResult> Create(CarCreateUpdateViewModel vm)
         {
@@ -87,7 +89,7 @@ namespace CarsApp.Controllers
                     ModifiedAt = DateTime.Now,
                 };
 
-                var result = await _carsServices.Create(dto);
+                var result = await _carsServices.Create(dto); // Calls the service to create the car.
 
                 if (result != null)
                 {
@@ -98,6 +100,7 @@ namespace CarsApp.Controllers
             return View("CreateUpdate", vm);
         }
 
+        // Displays the Update view for a specific car.
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
@@ -121,9 +124,10 @@ namespace CarsApp.Controllers
                 ModifiedAt = car.ModifiedAt
             };
 
-            return View("CreateUpdate", vm);
+            return View("CreateUpdate", vm); // Returns the Update view with car data pre-filled.
         }
 
+        // Handles the update of an existing car.
         [HttpPost]
         public async Task<IActionResult> Update(CarCreateUpdateViewModel vm)
         {
@@ -142,7 +146,7 @@ namespace CarsApp.Controllers
                     ModifiedAt = DateTime.Now,
                 };
 
-                var result = await _carsServices.Update(dto);
+                var result = await _carsServices.Update(dto); // Calls the service to update the car.
 
                 if (result != null)
                 {
@@ -153,10 +157,11 @@ namespace CarsApp.Controllers
             return View("CreateUpdate", vm);
         }
 
+        // Displays the Delete view for a specific car.
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var car = await _carsServices.DetailsAsync(id);
+            var car = await _carsServices.DetailsAsync(id); // Fetch car details.
 
             if (car == null)
             {
@@ -179,10 +184,11 @@ namespace CarsApp.Controllers
             return View(vm);
         }
 
+        // Handles the deletion of a car after confirmation.
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
-            var carId = await _carsServices.Delete(id);
+            var carId = await _carsServices.Delete(id); // Calls the service to delete the car.
 
             if (carId == null)
             {
