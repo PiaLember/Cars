@@ -176,7 +176,7 @@ namespace CarsApp.Controllers
                     Fuel = vm.Fuel,
                     Transmission = vm.Transmission,
                     Picture = vm.Picture,
-                    CreatedAt = DateTime.Now,
+                    CreatedAt = vm.CreatedAt,
                     ModifiedAt = DateTime.Now,
                 };
 
