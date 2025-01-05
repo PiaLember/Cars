@@ -19,8 +19,8 @@
     }
 }
 
-<div class="container">
-    <a asp-action="create" asp-controller="Cars" type="submit" class="btn btn-success">Create</a>
+<div>
+    <a asp-action="create" asp-controller="Cars" type="submit" class="btn create-button">Create</a>
 </div>
 
 <div class="h1">
@@ -44,55 +44,55 @@ else
                             Model
                             @if (currentSortOrder == "model_desc")
                             {
-                                <a asp-action="Index" asp-route-sortOrder="model_asc" asp-route-searchString="@currentSearchString">▲</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="model_asc" asp-route-searchString="@currentSearchString">▲</a>
                             }
                             else
                             {
-                                <a asp-action="Index" asp-route-sortOrder="model_desc" asp-route-searchString="@currentSearchString">▼</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="model_desc" asp-route-searchString="@currentSearchString">▼</a>
                             }
                         </th>
                         <th scope="col">
                             Color
                             @if (currentSortOrder == "color_desc")
                             {
-                                <a asp-action="Index" asp-route-sortOrder="color_asc" asp-route-searchString="@currentSearchString">▲</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="color_asc" asp-route-searchString="@currentSearchString">▲</a>
                             }
                             else
                             {
-                                <a asp-action="Index" asp-route-sortOrder="color_desc" asp-route-searchString="@currentSearchString">▼</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="color_desc" asp-route-searchString="@currentSearchString">▼</a>
                             }
                         </th>
                         <th scope="col">
                             Year
                             @if (currentSortOrder == "year_desc")
                             {
-                                <a asp-action="Index" asp-route-sortOrder="year_asc" asp-route-searchString="@currentSearchString">▲</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="year_asc" asp-route-searchString="@currentSearchString">▲</a>
                             }
                             else
                             {
-                                <a asp-action="Index" asp-route-sortOrder="year_desc" asp-route-searchString="@currentSearchString">▼</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="year_desc" asp-route-searchString="@currentSearchString">▼</a>
                             }
                         </th>
                         <th scope="col">
                             Fuel
                             @if (currentSortOrder == "fuel_desc")
                             {
-                                <a asp-action="Index" asp-route-sortOrder="fuel_asc" asp-route-searchString="@currentSearchString">▲</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="fuel_asc" asp-route-searchString="@currentSearchString">▲</a>
                             }
                             else
                             {
-                                <a asp-action="Index" asp-route-sortOrder="fuel_desc" asp-route-searchString="@currentSearchString">▼</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="fuel_desc" asp-route-searchString="@currentSearchString">▼</a>
                             }
                         </th>
                         <th scope="col">
                             Transmission
                             @if (currentSortOrder == "transmission_desc")
                             {
-                                <a asp-action="Index" asp-route-sortOrder="transmission_asc" asp-route-searchString="@currentSearchString">▲</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="transmission_asc" asp-route-searchString="@currentSearchString">▲</a>
                             }
                             else
                             {
-                                <a asp-action="Index" asp-route-sortOrder="transmission_desc" asp-route-searchString="@currentSearchString">▼</a>
+                                <a class="arrow" asp-action="Index" asp-route-sortOrder="transmission_desc" asp-route-searchString="@currentSearchString">▼</a>
                             }
                         </th>
                         <th></th>
@@ -114,8 +114,8 @@ else
                                 <img src="@car.Value.Picture" alt="@car.Value.Make" style="width:100px; height: auto" />
                             </td>
                             <td>
-                                <a asp-action="details" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn btn-info">Details</a>
-                                <a asp-action="update" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn btn-primary">Update</a>
+                                <a asp-action="details" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn details-button">Details</a>
+                                <a asp-action="update" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn update-button">Update</a>
                                 <a asp-action="delete" asp-controller="Cars" asp-route-id="@car.Value.Id" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>

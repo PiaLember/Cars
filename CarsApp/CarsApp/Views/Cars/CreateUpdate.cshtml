@@ -11,7 +11,7 @@ else
 }
 
 
-<h4>Cars</h4>
+<hr/>
 
 <div>
     <form method="post" enctype="multipart/form-data">
@@ -69,11 +69,11 @@ else
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="update" asp-controller="Cars" type="submit" class="btn btn-primary" value="Update" />
+            <input asp-action="update" asp-controller="Cars" type="submit" class="btn create-button" value="Update" />
         }
         else
         {
-            <input asp-action="create" asp-controller="Cars" type="submit" class="btn btn-primary" value="Create" />
+            <input asp-action="create" asp-controller="Cars" type="submit" class="btn create-button" value="Create" />
         }
 
         <a asp-action="index" class="btn btn-danger">Back</a>
